@@ -1,23 +1,13 @@
-using System.Collections.Generic;
-​
+using System.Linq;
 ​
 class WhichAreIn
         {
             public static string[] inArray(string[] array1, string[] array2)
             {
-              List<string> result = new List<string>();
-              
-              foreach(string a in array1){
-                foreach(string b in array2){
-                  if(b.Contains(a) && !result.Contains(a)){
-                    result.Add(a);
-                    break;
-                  }
-                }
-                
-              }
-              
-              result.Sort();
-              return result.ToArray();
+                return array1
+                  .Where(a => array2.Any(b => b.Contains(a)))
+                  .Distinct()
+                  .OrderBy(a => a)
+                  .ToArray();
             }
         }
